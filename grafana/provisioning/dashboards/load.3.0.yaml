@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+- name: '3.0'
+  orgId: 1
+  folder: '3.0'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
+  options:
+    path: /var/lib/grafana/dashboards/ver_3.0

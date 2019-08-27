@@ -1,0 +1,15 @@
+# List Scylla end points
+
+- targets:
+       - db-node1:9180
+       - db-node2:9180
+  labels:
+       cluster: Yggdrasil
+       dc: DC1
+
+- targets:
+    - db-node3:9180
+    - db-node4:9180
+  labels:
+    cluster: Yggdrasil
+    dc: DC2

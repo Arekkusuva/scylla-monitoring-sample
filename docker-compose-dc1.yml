@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+  db-node1:
+    image: scylladb/scylla:3.0.8
+    restart: always
+    command: --seeds=db-node1 --smp 1 --memory 256M --overprovisioned 1
+    volumes:
+      - ./scylla/scylla.yaml:/etc/scylla/scylla.yaml
+      - ./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties
+    ports:
+      - '9042:9042'
+    networks:
+      - db-net
+
+  db-node2:
+    image: scylladb/scylla:3.0.8
+    restart: always
+    command: --seeds=db-node1,db-node2 --smp 1 --memory 256M --overprovisioned 1
+    volumes:
+      - ./scylla/scylla.yaml:/etc/scylla/scylla.yaml
+      - ./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties
+    networks:
+      - db-net
+
+networks:
+  db-net:

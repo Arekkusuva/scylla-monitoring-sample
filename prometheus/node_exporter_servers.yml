@@ -1,0 +1,7 @@
+# List Node Exporter end points
+
+- targets:
+    - node-exporter:9100
+  labels:
+    cluster: Yggdrasil
+    dc: DC1

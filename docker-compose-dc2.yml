@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+
+  db-node3:
+    image: scylladb/scylla:3.0.8
+    restart: always
+    command: --seeds=db-node1,db-node3 --smp 1 --memory 256M --overprovisioned 1 --api-address 0.0.0.0
+    volumes:
+      - ./scylla/scylla.yaml:/etc/scylla/scylla.yaml
+      - ./scylla/cassandra-rackdc.properties.dc2:/etc/scylla/cassandra-rackdc.properties
+    networks:
+      - db-net
+
+  db-node4:
+    image: scylladb/scylla:3.0.8
+    restart: always
+    command: --seeds=db-node1,db-node3 --smp 1 --memory 256M --overprovisioned 1 --api-address 0.0.0.0
+    volumes:
+      - ./scylla/scylla.yaml:/etc/scylla/scylla.yaml
+      - ./scylla/cassandra-rackdc.properties.dc2:/etc/scylla/cassandra-rackdc.properties
+    networks:
+      - db-net
+
+networks:
+  db-net:
